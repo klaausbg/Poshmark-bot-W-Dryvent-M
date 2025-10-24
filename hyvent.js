@@ -141,7 +141,7 @@ async function checkPoshmark() {
           if (firstMatch) {
             await sendTelegramMessage("\u2063");
             await sendTelegramMessage(
-              "🔔 *You got new deals!*\n\nHere are the latest Women Dryvent Jackets:"
+              "🔔 *You got new deals!*\n\nHere are the latest Women dryvent Jackets:"
             );
             firstMatch = false;
           }
