@@ -1,0 +1,11 @@
+[phases.setup]
+nixPkgs = ["nodejs_18", "npm_9"]
+
+[phases.install]
+cmds = ["npm ci"]
+
+[phases.build]
+cmds = []
+
+[phases.start]
+cmd = "node hyvent.js"
