@@ -61,6 +61,7 @@ const browser = await puppeteer.launch({
   defaultViewport: chromium.defaultViewport,
   executablePath: await chromium.executablePath(),
   headless: chromium.headless,
+  protocolTimeout: 60000,
 });
 
 
