@@ -1,7 +1,9 @@
 require("dotenv").config();
 const fs = require("fs");
 const fetch = (...args) => import("node-fetch").then(({ default: fetch }) => fetch(...args));
-const puppeteer = require("puppeteer");
+const puppeteer = require("puppeteer-core");
+const chromium = require("@sparticuz/chromium");
+
 
 const { ensureTable, isSeen, markAsSeen } = require("./db_hyvent");
 
@@ -54,17 +56,13 @@ async function sendTelegramMessage(message) {
 async function checkPoshmark() {
   console.log("⏳ Launching Puppeteer...");
 
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: [
-      "--no-sandbox",
-      "--disable-setuid-sandbox",
-      "--disable-dev-shm-usage",
-      "--single-process",
-      "--no-zygote",
-    ],
-    protocolTimeout: 60000,
-  });
+const browser = await puppeteer.launch({
+  args: chromium.args,
+  defaultViewport: chromium.defaultViewport,
+  executablePath: await chromium.executablePath(),
+  headless: chromium.headless,
+});
+
 
   browser.on("disconnected", () => {
     console.error("❌ Chrome crashed or disconnected — restarting...");
