@@ -17,6 +17,10 @@ nixPkgs = [
   "libgbm"
 ]
 
+[variables]
+# 🚀 Força o Nixpacks a reconstruir tudo do zero
+FORCE_REBUILD = "v2" # (mude o número se precisar forçar de novo depois)
+
 [phases.install]
 cmds = ["npm ci"]
 
