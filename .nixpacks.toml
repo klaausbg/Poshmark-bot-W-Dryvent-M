@@ -3,15 +3,18 @@ nixPkgs = [
   "nodejs_18",
   "libnss3",
   "libatk",
-  "libatk_bridge",
   "libcups",
-  "libgbm",
   "libasound2",
-  "libpangocairo",
-  "libxss",
+  "libx11",
+  "libxcomposite",
+  "libxdamage",
+  "libxrandr",
   "libgtk3",
+  "libxkbcommon",
   "libxshmfence",
-  "libglu"
+  "libglu",
+  "libdrm",
+  "libgbm"
 ]
 
 [phases.install]
