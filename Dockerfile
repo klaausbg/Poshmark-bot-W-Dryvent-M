@@ -1,7 +1,7 @@
-# Base Node.js 18
+# Base Node.js 18 (Debian Bullseye)
 FROM node:18-bullseye
 
-# Instala dependências do Chromium
+# Instala dependências que o Puppeteer precisa para rodar o Chromium
 RUN apt-get update && apt-get install -y \
   libnss3 \
   libatk1.0-0 \
@@ -20,18 +20,22 @@ RUN apt-get update && apt-get install -y \
   fonts-liberation \
   libappindicator3-1 \
   xdg-utils \
-  chromium \
   && rm -rf /var/lib/apt/lists/*
 
 # Define diretório de trabalho
 WORKDIR /app
 
-# Copia arquivos e instala dependências
+# Copia pacotes e instala dependências
 COPY package*.json ./
 RUN npm ci
 
-# Copia o resto do código
+# Copia o restante do código
 COPY . .
 
-# Comando de inicialização
+# Define variáveis de ambiente padrão (caso precise)
+ENV NODE_ENV=production \
+    PUPPETEER_SKIP_DOWNLOAD=false \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+
+# Roda seu bot
 CMD ["node", "hyvent.js"]
